@@ -95,7 +95,7 @@ Application config file i.e application.properties is located at src/main/resour
 Following algorithm is used to convert number to roman numeral:
 1.  Created a Tree Map for number and unique roman numeral to maintain the order.
 2. This supports only number from 1-3999
-    * If number is less than zero or number is greater than 4000 return Empty String
+    * If number is less than zero or number is greater than 3999 return Empty String
     * While number is greater than zero and less than 4000 
         * Find the Floor Key closest to the number from Tree Map
         * Append the Value from tree Map to String builder
