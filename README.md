@@ -16,7 +16,7 @@ Spring provides many external supported monitoring system and tried using below 
 * **Micrometer:** Exposes the metrics from our application
 * **Prometheus:** Stores our metrics data
 
-#####Logging
+##### Logging
 Config file application.properties have been enhanced to set log level and log location for application: /Users/dmakkar/romannumeral/logs/application.log
 
 Here are the Endpoints:
