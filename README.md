@@ -103,6 +103,7 @@ Following algorithm is used to convert number to roman numeral:
       * Subtract the closest floor key from the number
     
 Testing covers algorithm and Http Endpoints with set of valid and invalid inputs.
+## Test Coverage
 <div align="center">
     <img src="/src/main/resources/img.png" width="800px"></img>
 </div>
