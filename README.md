@@ -1,4 +1,4 @@
-# Roman Numeral 
+# Roman Numeral
 This is a Java/ Maven/ Spring boot based microservice to convert number to Roman Numeral. It also includes devops capabilities for metrics, health, logging etc.
 Limited to set of numbers ranging from 1-3999
 
@@ -50,10 +50,11 @@ http://localhost:8080/actuator/prometheus
 * Intellij
 * Java 1.8 + (I am using the latest version 14.0.1)
 * Maven 3.x
-* Spring Boot Web 
+* Spring Boot Web
 * Spring Boot Actuator
 * Micrometer
 * JUnit5
+* Spring Boot Validation
 
 ## How to build and run
 You can run below commands from command line at project pom level
@@ -66,7 +67,7 @@ You can run below commands from command line at project pom level
 ````
 # mvn spring-boot:run
 ````
-#### Run Test 
+#### Run Test
 ````
 # mvn test
 ````
@@ -86,32 +87,41 @@ Junit Test are used to validate the toRoman() method for various valid and inval
 Integration Test are used to test the http endpoint with query param and invalid param and is located at src/test/java/com/simple/numeric/converter/romannumeral/integration
 ````
 
-#### Configs 
+#### Configs
 ````
 Application config file i.e application.properties is located at src/main/resources
 ````
 
-## Engineering and Testing Methodology 
+## Engineering and Testing Methodology
 Following algorithm is used to convert number to roman numeral:
 1.  Created a Tree Map for number and unique roman numeral to maintain the order.
 2. This supports only number from 1-3999
-    * If number is less than zero or number is greater than 3999 return Empty String
-    * While number is greater than zero and less than 4000 
-        * Find the Floor Key closest to the number from Tree Map
-        * Append the Value from tree Map to String builder
-        * Subtract the closest floor key from the number
+   * If number is less than zero or number is greater than 3999 return Empty String
+   * While number is greater than zero and less than 4000
+      * Find the Floor Key closest to the number from Tree Map
+      * Append the Value from tree Map to String builder
+      * Subtract the closest floor key from the number
     
 Testing covers algorithm and Http Endpoints with set of valid and invalid inputs.
+## Test Coverage
+<div align="center">
+    <img src="/src/main/resources/img.png" width="800px"></img>
+</div>
 
 ## Error Handling
 The query param passed is empty results in default behavior by return roman numeral for number 1.
-Any other input outside 1-3999 results in a ResponseStatusException which throws HttpStatus.BAD_REQUEST - 400.
+Exception/Error are handled using Exception handlers defined at single Global error handling component.
+Handled Exceptions:
+* MethodArgumentTypeMismatch : This handles an incompatible argument type
+  is passed to service i.e. String rather expected type Integer
+* ConstraintViolation : Any other input outside 1-3999 results in this exception
+* Catch-All : Handler is defined for any other exception that occurs.
 
 ## Additional Ways to Monitor with Supported Monitoring Systems
 We have added micrometer dependency in this project and once you have prometheus running on an actuator - /actuator/prometheus and this endpoint will be used to expose metrics data in a format which can be scraped by prometheus server.
 You need to do below to set up prometheus
-* Install Docker  
-* Download Prometheus image 
+* Install Docker
+* Download Prometheus image
 ```
 # docker pull prom/prometheus
 ```

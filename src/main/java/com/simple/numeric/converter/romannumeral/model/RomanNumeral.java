@@ -10,6 +10,8 @@ public class RomanNumeral {
 
     /**
      * Creating static block to load mapping, once class is loaded
+     * We are using TreeMap as it maintains order to natural ordering of keys
+     * which will be leveraged to obtain the greatest key less than or equal to number passed in
      */
     static{
         numberRomanMap.put(1,"I");
@@ -53,14 +55,26 @@ public class RomanNumeral {
         return romanValue.toString();
     }
 
+    /**
+     * Getter for Number
+     * @return Integer
+     */
     public Integer getNumber() {
         return number;
     }
 
+    /**
+     * Getter for RomanNumeral
+     * @return String
+     */
     public String getRomanNumeral() {
         return romanNumeral;
     }
 
+    /**
+     * Produces String as defined
+     * @return String
+     */
     @Override
     public String toString() {
         return "RomanNumeral{" +
